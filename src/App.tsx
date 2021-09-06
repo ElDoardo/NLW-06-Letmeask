@@ -1,25 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Home } from './pages/Home';
+import { NewRoom } from './pages/NewRoom';
+import { BrowserRouter,Route } from 'react-router-dom';
+import {createContext, useState} from 'react';
+
+export const TestContext = createContext('');
 
 function App() {
+  const [value, setValue] = useState('Teste')
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <TestContext.Provider value = {value}>
+        <Route path='/' exact={true} component={Home}/>
+        <Route path='/rooms/new' component={NewRoom}/>
+      </TestContext.Provider>
+    </BrowserRouter>
   );
 }
 
